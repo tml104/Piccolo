@@ -118,6 +118,32 @@ namespace Piccolo
                 g_editor_global_context.m_scene_manager->drawSelectedEntityAxis();
             }
         };
+
+        m_editor_ui_creator["JumpInitSpeed"] = [this](const std::string& name, void* value_ptr) -> void {
+            if (g_node_depth == -1)
+            {
+                std::string label = "##" + name;
+                ImGui::Text("%s", name.c_str());
+                ImGui::SameLine();
+
+                auto vp = static_cast<JumpInitSpeed*>(value_ptr);
+                //ImGui::InputFloat(label.c_str(), &(vp->jump_init_speed));
+                ImGui::SliderFloat("init_speed", &(vp->jump_init_speed), 0.f, 30.f);
+            }
+            else
+            {
+                if (g_editor_node_state_array[g_node_depth].second)
+                {
+                    std::string full_label = "##" + getLeafUINodeParentLabel() + name;
+                    ImGui::Text("%s", (name + ":").c_str());
+
+                    auto vp = static_cast<JumpInitSpeed*>(value_ptr);
+                    //ImGui::InputFloat(full_label.c_str(), &(vp->jump_init_speed));
+                    ImGui::SliderFloat("init_speed", &(vp->jump_init_speed), 0.f, 30.f);
+                }
+            }
+        };
+
         m_editor_ui_creator["int"] = [this](const std::string& name, void* value_ptr) -> void {
             if (g_node_depth == -1)
             {

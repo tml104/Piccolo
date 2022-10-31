@@ -3,6 +3,7 @@
 #include "runtime/core/math/vector3.h"
 #include "runtime/core/meta/reflection/reflection.h"
 #include "runtime/resource/res_type/data/basic_shape.h"
+#include "runtime/resource/res_type/components/jump_init_speed.h"
 
 namespace Piccolo
 {
@@ -48,6 +49,8 @@ namespace Piccolo
         float m_max_sprint_speed_ratio { 0.f};
         float m_move_acceleration {0.f};
         float m_sprint_acceleration { 0.f};
+
+        JumpInitSpeed m_jump_init_speed;
 
         Reflection::ReflectionPtr<ControllerConfig> m_controller_config;
     };
